@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+{% include "header.html" %}
+<br>
+<a href="/catalog/signup">Signup</a>
+<br>
+<br>
+<form method="post">
+    <div>Login</div>
+    <input name=userName placeholder='username'>
+    <br>
+    <br>
+    <input name=password placeholder="password">
+    <br>
+    <br>
+    <input value="submit" type="submit">
+</form>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<ul>
+  {% for message in messages %}
+  <li><strong>{{message}}</strong></li>
+  {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+<div>{{error}}</div>
+<br>
+<div style="color: red">{{error}}</div>
+<div>{% for x in categories %}
+    <ul>
+        <li><a href="/catalog/{{x.name}}">{{ x.name }}</a></li>
+    </ul>
+    {% endfor %}
+</div>
+<br>
+<div>Below is the list of items in the chosen category</div>
+<br>
+<div>{% for y in itemsInCategory %}
+    <ul>
+        <li>{{ y.name }}</li>
+        <li>{{ y.author }}</li>
+    </ul>
+    {% endfor %}
+</div>
+
+{% endblock %}
+
+<!--
