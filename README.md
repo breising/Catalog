@@ -6,9 +6,9 @@ A basic catalog app built with Flask, sqlalchemy, sqlite. Users can optionally c
 ### How to run:
 
 To run the app, you must have python installed:
-1. from the shell, navigate to the catalog root dir.
-2. Create the database by running the setup: python database_setup.py
-3. Optional: to populate the db with a bulk list of items you can modify the "catalog_items.py" file and then run it: python catalog_items.py
-4. Finally, to run the app type: python catalog.py    
+1. navigate to the catalog root dir.
+2. Create the database by running the setup: `python database_setup.py`
+3. Optional. To populate the db with a bulk list of items you can modify the `catalog_items.py` file and then run it: `python catalog_items.py`
+4. Finally, to run the app: `python catalog.py` 
 5. In your browser, navigate to localhost at port 8000
 
