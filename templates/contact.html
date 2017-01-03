@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+	{% block content %}
+	{% include "header.html" %}
+	<br>
+	<br>
+	<div class="col-xs-2 col-md-3"></div>
+	    <div class="col-xs-8 col-md-6">
+			<h4>Contact</h4>
+			<br>
+			{% if success %}
+			    <p>Thank you for your message. We'll get back to you shortly.</p>
+			{% else %}
+			  {% for message in form.name.errors %}
+			    <div class="flash">{{ message }}</div>
+			  {% endfor %}
+			 
+			  {% for message in form.email.errors %}
+			    <div class="flash">{{ message }}</div>
+			  {% endfor %}
+			 
+			  {% for message in form.subject.errors %}
+			    <div class="flash">{{ message }}</div>
+			  {% endfor %}
+			 
+			  {% for message in form.message.errors %}
+			    <div class="flash">{{ message }}</div>
+			  {% endfor %}
+
+			<br>
+			<form action="{{ url_for('contact') }}" method="POST">
+				{{ form.hidden_tag() }}
+			 
+			    {{ form.name.label }}
+			    {{ form.name }}
+			 	<br>
+			    {{ form.email.label }}
+			    {{ form.email }}
+				 <br>
+			    {{ form.subject.label }}
+			    {{ form.subject }}
+				 <br>
+			    {{ form.message.label }}
+			    {{ form.message }}
+				 <br>
+			    {{ form.submit }}
+			</form>
+			{% endif %}
+
+			<a href="/catalog">Cancel</a>
+	<div class="col-xs-2 col-md-3"></div>
+	{% endblock %}

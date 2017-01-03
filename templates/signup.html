@@ -1,32 +1,32 @@
 {% extends "base.html" %}
-{% block content %}
-{% include "header.html" %}
-<br>
-<br>
-{% with messages = get_flashed_messages() %}
-{% if messages %}
-{% for message in messages %}
-<div>{{message}}</div>
-{% endfor %}
-{% endif %}
-{% endwith %}
-<br>
-<br>
-<form method="post">
-    <div>Signup</div>
-    <input name=userName placeholder='username'>
-    <br>
-    <br>
-    <input name=password placeholder="password" type="password">
-    <br>
-    <br>
-    <input name=verify placeholder="retype password" type="password">
-    <br>
-    <br>
-    <input placeholder="Submit" type="submit">
-    <br>
-    <br>
-    <a href="/catalog/newArrivals">Cancel</a>
-</form>
+    {% block content %}
+        {% include "header.html" %}
+        <br>
+        <br>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p style="color: red" class="list-unstyled">{{message}}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <br>
+        <br>
+        <form method="post">
+            <div>Signup</div>
+            <input name=userName placeholder='username'>
+            <br>
+            <br>
+            <input name=password placeholder="password" type="password">
+            <br>
+            <br>
+            <input name=verify placeholder="retype password" type="password">
+            <br>
+            <br>
+            <input placeholder="Submit" type="submit">
+            <br>
+            <br>
+            <a href="/catalog/newArrivals">Cancel</a>
+        </form>
 
 {% endblock %}

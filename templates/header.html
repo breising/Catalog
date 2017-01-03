@@ -1,2 +1,10 @@
-<div>This is the header content
+<div class="row 11">
+	<div class="col-xs-12">
+		<ul class="nav nav-tabs">
+		  <li role="presentation" class="{{ home }}"><a href="/catalog">home</a></li>
+		  <li role="presentation" class="{{ delete }}"><a href="/catalog/deleteCategory/{{ category_name }}/{{ category_id }}">Delete</a></li>
+		  <li role="presentation" class="{{ add }}"><a href="/catalog/add-item/{{ category_name }}/{{ category_id }}">Add</a></li>
+		  <li role="presentation" class="{{ log }}"><a href="/catalog/{{ inout }}">{{ sign }}</a></li>
+		</ul>
+	</div>
 </div>

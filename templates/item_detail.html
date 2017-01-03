@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+	{% block content %}
+		{% include "header.html" %}
+			<br>
+			<br>
+			<div class="row">
+				<div class="col-xs-2 col-md-4"></div>
+				<div class="col-xs-8 col-md-4">
+					{% with messages = get_flashed_messages() %}
+						{% if messages %}
+		                  	{% for message in messages %}
+		                    	<p style="color: red" class="list-unstyled">{{message}}</p>
+		                  	{% endfor %}
+		               	{% endif %}
+					{% endwith %}
+					<h4> {{ item.name}}</h4>
+					<p>Description: {{ item.description}}</p>
+					<p>Image url: {{ item.image}}</p>
+					<p>sku: {{ item.sku}}</p>
+					<p>Author: {{ auth_name }}</p>
+					<a class="btn btn-default" style="display: {{ flag }}" href="{{ url_edit }}">Edit</a>
+					<a class="btn btn-default" style="display: {{ flag }}" href="{{ url_delete }}">Delete</a>
+					<a class="btn btn-default" href="/catalog/{{ category_name }}/items/{{ category_id }}">Back</a>
+				</div>
+				<div class="col-xs-2 col-md-4"></div>
+			</div>
+
+{% endblock %}

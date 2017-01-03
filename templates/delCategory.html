@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+	{% block content %}
+		{% include "header.html" %}
+			<br>
+			<br>
+			<div class="row">
+	            <div class="col-xs-12">
+				{% with messages = get_flashed_messages() %}
+					{% if messages %}
+	                  {% for message in messages %}
+	                      <p style="color: red" class="text-center list-unstyled">{{message}}</p>
+	                  {% endfor %}
+	                {% endif %}
+				{% endwith %}
+				</div>
+			</div>
+			<br>
+			<br>
+			<div class="row">
+				<div class="col-xs-3 col-md-3"></div>
+				<div class="col-xs-6 col-md-6">
+					<form class="delete" method='POST'>
+						<div class="form-group">
+							<label class="control-label">Pick a Category</label>
+							<br>
+							<br>
+							<select class="form-control selectCat" name="categoryId">
+								{% for x in categories %}
+									<option value="{{ x.id }}">{{ x.name}}</option>
+								{% endfor %}
+							</select>
+							<br>
+							<br>
+							<input class="del btn btn-default" type="button" value="Delete category">
+							<input style="display: none" class="delete" type="submit" value="DELETE">
+						</div>
+					</form>
+					<a class="btn btn-default" href="/catalog/{{ category_name }}/items/{{ category_id }}">Cancel</a>
+				</div>
+				<div class="col-xs-3 col-md-3"></div>
+			</div>
+<script>
+$(document).ready(function() {
+    $('.del').click(function() {
+    	var answer = confirm("Are you sure you want to delete this category and ALL of its items?");
+    	if (answer == true) {
+    		$('.delete').submit()
+    	} else {
+    		alert("OK. Nothing deleted.")
+    	}
+    })
+})
+</script>
+{% endblock %}
