@@ -5,11 +5,10 @@ from database_setup import User, Base, Category, Item
 from flask import session as login_session
 
 
-app = Flask(__name__)
+# app = Flask(__name__)
 
 engine = create_engine('sqlite:///catalog.db')
 Base.metadata.bind = engine
-
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
@@ -18,19 +17,23 @@ def createUser(login_session):
     '''
     THis fx accesses information about the user that is stored in login_session and was gotten from the G+ server, their email, username and uses that info to create a User in our system db. So we'll have our user's basic info stored on our system to use for authorizing various activities like creating Items and Categories etc. but we'll NOT have their password. And we won't have to worry about managing passwords.
     '''
-    newUser = User(name=login_session['username'], email=login_session[
-                   'email'])
-    session.add(newUser)
-    session.commit()
-    user = session.query(User).filter_by(email=login_session['email']).one()
-    return user.id
+    # is the user already in the db ?
+    alreadyUser = session.query(User).filter_by(email=login_session['email']).\
+        one()
+    # if so, don't add it again
+    if alreadyUser.email:
+        print "Your email is already in the database."
+        return alreadyUser.id
+    # if not then add it
+    else:
+        newUser = User(name=login_session['username'], email=login_session[
+                       'email'])
+        session.add(newUser)
+        session.commit()
 
-
-def getUserInfo(user_id):
-    '''
-    This function uses the user_id parameter to query the db for the current user row object and returns that object.
-
-    '''
-    user = session.query(User).filter_by(id=user_id).one()
-    # returns the whole user object
-    return user
+    try:
+        user = session.query(User).filter_by(email=login_session['email']).\
+            one()
+        return user.id
+    except:
+        print "CreateUser failed on something."

@@ -1,18 +1,11 @@
-from flask import Flask, redirect, render_template, url_for, request, \
-    flash, jsonify
+from flask import Flask, redirect, render_template, flash, jsonify
 from sqlalchemy import create_engine, desc
 from sqlalchemy.orm import sessionmaker
 from database_setup import User, Base, Category, Item
 from flask import session as login_session
-
+from dbSession import session
 
 app = Flask(__name__)
-
-engine = create_engine('sqlite:///catalog.db')
-Base.metadata.bind = engine
-
-DBSession = sessionmaker(bind=engine)
-session = DBSession()
 
 
 def change_cat(category_name, category_id):

@@ -7,6 +7,7 @@ from handlers import main, login, item_detail, item_edit, change_cat,\
     item_delete, add_item, signout, delCategory, catalogJSON, gconnect, gdisconnect
 import string
 from flask import session as login_session
+from dbSession import session
 
 APPLICATION_NAME = "Catalog"
 
@@ -22,12 +23,6 @@ app.secret_key = 'brisIsblah7823andalsoisbiablai'
 # app.config["MAIL_USE_SSL"] = True
 # app.config["MAIL_USERNAME"] = 'support@orthocure.biz'
 # app.config["MAIL_PASSWORD"] = 'Bcr062003'
-
-engine = create_engine('sqlite:///catalog.db')
-Base.metadata.bind = engine
-
-DBSession = sessionmaker(bind=engine)
-session = DBSession()
 
 # Handlers
 # redirect all / requests to /catalog
@@ -71,14 +66,14 @@ delCategory = app.route\
     ('/catalog/deleteCategory/<string:category_name>/<int:category_id>',
      methods=['GET', 'POST'])(delCategory)
 
-catalogJSON = app.route\
-    ('/catalog/JSON')(catalogJSON)
-
 gconnect = app.route\
     ('/gconnect', methods=['POST'])(gconnect)
 
 gdisconnect = app.route\
     ('/gdisconnect')(gdisconnect)
+
+catalogJSON = app.route\
+    ('/catalog/item/<string:item_name>/<string:item_id>/JSON')(catalogJSON)
 
 
 if __name__ == '__main__':

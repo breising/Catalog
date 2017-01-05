@@ -1,8 +1,5 @@
-from flask import Flask, redirect, render_template, url_for, request, \
-    flash, jsonify, make_response
-from sqlalchemy import create_engine, desc
-from sqlalchemy.orm import sessionmaker
-from database_setup import User, Base, Category, Item
+from flask import Flask, redirect, render_template, flash, jsonify, \
+    make_response, request, url_for
 from flask import session as login_session
 from oauth2client.client import flow_from_clientsecrets
 from oauth2client.client import FlowExchangeError
@@ -12,12 +9,6 @@ import requests
 from functions import createUser, getUserID
 
 app = Flask(__name__)
-
-engine = create_engine('sqlite:///catalog.db')
-Base.metadata.bind = engine
-
-DBSession = sessionmaker(bind=engine)
-session = DBSession()
 
 CLIENT_ID = json.loads(
     open('client_secrets.json', 'r').read())['web']['client_id']
